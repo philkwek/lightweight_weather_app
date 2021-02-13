@@ -31,12 +31,13 @@ function getWeatherData(current_lat, current_lng){
             console.log(result);
 
             var temperature = result['main']['temp'];
-            var weather = result['weather']['0']['main'];
+            var weather = result['weather']['0']['description'];
+            var weather_icon = result['weather']['0']['icon']
             var country_code = result['sys']['country'];
 
-            console.log(weather, temperature, country_code);
+            console.log(weather, temperature, country_code, weather_icon);
 
-            insertData(temperature, weather, getCountryName(country_code));
+            insertData(temperature, weather, getCountryName(country_code), weather_icon);
         },
 
         error: function (error) { //runs when api get is unsuccessfull
@@ -56,7 +57,7 @@ function getCountryName (countryCode) {
 };
 
 
-function insertData(temperature, weather, country_code){
+function insertData(temperature, weather, country_code, weather_icon){
 
     var insert_country = document.getElementById('country_name');
     var insert_weather = document.getElementById('weather');
@@ -65,7 +66,67 @@ function insertData(temperature, weather, country_code){
     insert_country.innerHTML = country_code;
     insert_temp.innerHTML = temperature;
     insert_weather.innerHTML = weather;
+
+    runAnimation(weather_icon);
 };
+
+function runAnimation(icon_number){ //this function plays corresponding animation for weather
+    console.log(icon_number)
+    var skycons = new Skycons({"color": "white"});
+    skycons.add(document.getElementById("icon1"), Skycons.CLOUDY);
+    skycons.play()
+
+
+    if (icon_number == '11d') { //11d/n is the code for thunder showers
+        skycons.set('icon1', Skycons.THUNDER_SHOWERS_DAY)
+    } else if (icon_number == '11n') {
+        skycons.set('icon1', Skycons.THUNDER_SHOWERS_NIGHT)
+
+
+    } else if (icon_number == '09d' || icon_number == '10d'){ //09d/n is the code for drizzles/rain/shower
+        skycons.set('icon1', Skycons.SHOWERS_DAY)
+    } else if (icon_number == '09n' || icon_number == '10n') {
+        skycons.set('icon1', Skycons.SHOWERS_NIGHT)
+
+
+    } else if (icon_number == '04d' || icon_number == '03d' || icon_number == '04n' || icon_number == '03n' ) {
+        skycons.set('icon1', Skycons.CLOUDY)
+
+
+    } else if (icon_number == '02d') {
+        skycons.set('icon1', Skycons.PARTLY_CLOUDY_DAY)
+    } else if (icon_number == '02n') {
+        skycons.set('icon1', Skycons.PARTLY_CLOUDY_NIGHT)
+
+
+    } else if (icon_number == '50d' || icon_number == '50n') {
+        skycons.set('icon1', Skycons.FOG)
+
+
+    } else if (icon_number == '13d') {
+        skycons.set('icon1', Skycons.SNOW_SHOWERS_DAY)
+    } else if (icon_number == '13n') {
+        skycons.set('icon1', Skycons.SNOW_SHOWERS_NIGHT)
+
+
+    } else if (icon_number == '01d') {
+        skycons.set('icon1', Skycons.CLEAR_DAY)
+    } else if (icon_number == '01n') {
+        skycons.set('icon1', Skycons.CLEAR_NIGHT)
+    }
+
+    var n = icon_number.includes('d')
+    console.log(n)
+
+    if (n == true) {
+        document.body.style.background = "linear-gradient(160deg, #0093E9 0%, #80D0C7)";
+    } else {
+        document.body.style.background = "linear-gradient(147deg, #000000 0%, #2c3e50 74%)";
+    }
+
+    $('#loading_animation').hide();
+    $('#body_elements').show();
+}
 
 
 $(document).ready(getCurrentLocation());
