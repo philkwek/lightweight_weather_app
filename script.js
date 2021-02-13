@@ -22,7 +22,7 @@ function showPosition(position){
 function getWeatherData(current_lat, current_lng){
 
     $.ajax({
-        url: "http://api.openweathermap.org/data/2.5/weather?lat=" + current_lat + "&lon=" + current_lng + 
+        url: "https://api.openweathermap.org/data/2.5/weather?lat=" + current_lat + "&lon=" + current_lng + 
         "&appid=88154f11b1e1f5b155a009be7359b266&units=metric",
         type: "GET",
 
