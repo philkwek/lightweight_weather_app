@@ -126,6 +126,7 @@ function runAnimation(icon_number){ //this function plays corresponding animatio
 
     $('#loading_animation').hide();
     $('#body_elements').show();
+    document.getElementById('footer').style.display = "none";
 }
 
 
