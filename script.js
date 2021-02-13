@@ -130,7 +130,7 @@ function runAnimation(icon_number){ //this function plays corresponding animatio
 }
 
 
-$(document).ready(setTimeout(getCurrentLocation(),5000));
+$(document).ready(setTimeout(getCurrentLocation()),3000);
 
 
 
