@@ -1,7 +1,7 @@
 # A small, lightweight weather app
 A small fun project!
 
-## [Click me to open Webapp](https://philkwek.github.io/lightweight_weather_app/)
+## [Click me to open Weather App!](https://philkwek.github.io/lightweight_weather_app/)
 
 This was a small project I did in my free time for fun!
 
